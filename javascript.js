@@ -8,6 +8,15 @@ class Despesa {
         this.descricao = descricao
         this.valor = valor
     }
+
+    validarDados () {
+        for (let i in this) {
+            if (this[i]===null || this[i]=="" || this[i]===undefined) {
+                return false
+            }
+        }
+        return true
+    }
 }
 
 class Bd {
@@ -27,6 +36,34 @@ class Bd {
         despesa_json = JSON.stringify(despesa_json)
         localStorage.setItem(id, despesa_json)
         localStorage.setItem("id", id)
+        console.log(localStorage.getItem(id))
+    }
+    recuperarRegistros () {
+        let id = localStorage.getItem("id")
+
+        for (let i = 1; i<=id ; i++)
+        {
+            let despesa = localStorage.getItem(i)
+            despesa = JSON.parse(despesa)
+            if (despesa===null) {
+                continue
+            }
+            let criando_tr = document.createElement("tr")
+            let criando_td_data = document.createElement("td")
+            let criando_td_tipo = document.createElement("td")
+            let criando_td_descricao = document.createElement("td")
+            let criando_td_valor = document.createElement("td")
+            criando_td_data.innerHTML = despesa["ano"]
+            criando_td_tipo.innerHTML = despesa["tipo"]
+            criando_td_descricao.innerHTML = despesa["descricao"]
+            criando_td_valor.innerHTML = despesa["valor"]
+            criando_tr.appendChild(criando_td_data)
+            criando_tr.appendChild(criando_td_tipo)
+            criando_tr.appendChild(criando_td_descricao)
+            criando_tr.appendChild(criando_td_valor)
+            document.getElementById("tabela").appendChild(criando_tr)
+
+        }
     }
 }
 
@@ -43,7 +80,21 @@ function cadastrandoUsuario () {
 
     let despesa = new Despesa(ano, mes, dia, tipo, descricao, valor)
 
-    bd.gravar(despesa)
+
+    if (despesa.validarDados()==true) {
+        bd.gravar(despesa)
+        document.getElementById("dia").value = ""
+        document.getElementById("descricao").value = ""
+        document.getElementById("valor").value = ""
+        alert("Dados Inseridos com sucesso!")
+    } else {
+        alert("Dados inválidos tente novamente")
+    }
+
+}
+
+function consultando_dados() {
+    bd.recuperarRegistros()
 }
 
 
