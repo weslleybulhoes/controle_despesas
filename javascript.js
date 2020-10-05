@@ -27,10 +27,12 @@ class Bd {
             localStorage.setItem('id', 0)
         }
     }
-    getProximoId () {
+
+    getProximoId() {
         let proximoId = localStorage.getItem("id")
         return parseInt(proximoId) + 1
     }
+
     gravar(despesa_json) {
         let id = this.getProximoId()
         despesa_json = JSON.stringify(despesa_json)
@@ -38,35 +40,44 @@ class Bd {
         localStorage.setItem("id", id)
         console.log(localStorage.getItem(id))
     }
-    recuperarRegistros () {
-        let id = localStorage.getItem("id")
 
-        for (let i = 1; i<=id ; i++)
-        {
+    recuperarRegistros() {
+        let id = localStorage.getItem("id")
+        let array_despesas = []
+
+        for (let i = 1; i <= id; i++) {
             let despesa = localStorage.getItem(i)
             despesa = JSON.parse(despesa)
-            if (despesa===null) {
+            if (despesa === null) {
                 continue
             }
+            array_despesas.push(despesa)
+
+        }
+        return array_despesas
+    }
+
+    adicionandoRegistros(array_despesas) {
+        let id = 0
+        while (id < array_despesas.length) {
             let criando_tr = document.createElement("tr")
             let criando_td_data = document.createElement("td")
             let criando_td_tipo = document.createElement("td")
             let criando_td_descricao = document.createElement("td")
             let criando_td_valor = document.createElement("td")
-            criando_td_data.innerHTML = despesa["ano"]
-            criando_td_tipo.innerHTML = despesa["tipo"]
-            criando_td_descricao.innerHTML = despesa["descricao"]
-            criando_td_valor.innerHTML = despesa["valor"]
+            criando_td_data.innerHTML = array_despesas[id]["ano"]
+            criando_td_tipo.innerHTML = array_despesas[id]["tipo"]
+            criando_td_descricao.innerHTML = array_despesas[id]["descricao"]
+            criando_td_valor.innerHTML = array_despesas[id]["valor"]
             criando_tr.appendChild(criando_td_data)
             criando_tr.appendChild(criando_td_tipo)
             criando_tr.appendChild(criando_td_descricao)
             criando_tr.appendChild(criando_td_valor)
             document.getElementById("tabela").appendChild(criando_tr)
-
+            id = id + 1
         }
     }
 }
-
 
 let bd = new Bd()
 
@@ -94,7 +105,8 @@ function cadastrandoUsuario () {
 }
 
 function consultando_dados() {
-    bd.recuperarRegistros()
+    let array_despesas = bd.recuperarRegistros()
+    bd.adicionandoRegistros(array_despesas)
 }
 
 
