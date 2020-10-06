@@ -60,6 +60,7 @@ class Bd {
     adicionandoRegistros(array_despesas) {
         let id = 0
         while (id < array_despesas.length) {
+            console.log("será que naao")
             let criando_tr = document.createElement("tr")
             let criando_td_data = document.createElement("td")
             let criando_td_tipo = document.createElement("td")
@@ -100,8 +101,11 @@ class Bd {
     }
     filtro(array_despesas) {
         let tipo = document.getElementById("tipo_consulta").value
-        let filtro = array_despesas.filter(tipo)
-        console.log(tipo)
+        let filtro = array_despesas.filter(
+            (f)=>f.tipo==tipo
+        )
+        console.log(filtro)
+        bd.adicionandoRegistros(filtro)
     }
 }
 
@@ -138,8 +142,9 @@ function consultando_dados() {
 function filtrando_dados() {
     let array_despesas = bd.recuperarRegistros()
     bd.filtro(array_despesas)
-
 }
+
+
 
 
 
