@@ -65,10 +65,31 @@ class Bd {
             let criando_td_tipo = document.createElement("td")
             let criando_td_descricao = document.createElement("td")
             let criando_td_valor = document.createElement("td")
-            criando_td_data.innerHTML = array_despesas[id]["ano"]
+
+            switch (parseInt(array_despesas[id]["tipo"])) {
+                case 1:
+                    array_despesas[id]["tipo"] = "Alimentação"
+                    break
+                case 2:
+                    array_despesas[id]["tipo"] = "Educação"
+                    break
+                case 3:
+                    array_despesas[id]["tipo"] = "Lazer"
+                    break
+                case 4:
+                    array_despesas[id]["tipo"] = "Saúde"
+                    break
+                case 5:
+                    array_despesas[id]["tipo"] = "Transporte"
+                    break
+            }
+
+            criando_td_data.innerHTML =
+                array_despesas[id]["dia"]+"/"+array_despesas[id]["mes"]+"/"+
+                array_despesas[id]["ano"]
             criando_td_tipo.innerHTML = array_despesas[id]["tipo"]
             criando_td_descricao.innerHTML = array_despesas[id]["descricao"]
-            criando_td_valor.innerHTML = array_despesas[id]["valor"]
+            criando_td_valor.innerHTML = "R$ " + array_despesas[id]["valor"]
             criando_tr.appendChild(criando_td_data)
             criando_tr.appendChild(criando_td_tipo)
             criando_tr.appendChild(criando_td_descricao)
@@ -76,6 +97,11 @@ class Bd {
             document.getElementById("tabela").appendChild(criando_tr)
             id = id + 1
         }
+    }
+    filtro(array_despesas) {
+        let tipo = document.getElementById("tipo_consulta").value
+        let filtro = array_despesas.filter(tipo)
+        console.log(tipo)
     }
 }
 
@@ -107,6 +133,12 @@ function cadastrandoUsuario () {
 function consultando_dados() {
     let array_despesas = bd.recuperarRegistros()
     bd.adicionandoRegistros(array_despesas)
+}
+
+function filtrando_dados() {
+    let array_despesas = bd.recuperarRegistros()
+    bd.filtro(array_despesas)
+
 }
 
 
