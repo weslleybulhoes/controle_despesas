@@ -59,8 +59,8 @@ class Bd {
 
     adicionandoRegistros(array_despesas) {
         let id = 0
+        console.log(array_despesas.length)
         while (id < array_despesas.length) {
-            console.log("será que naao")
             let criando_tr = document.createElement("tr")
             let criando_td_data = document.createElement("td")
             let criando_td_tipo = document.createElement("td")
@@ -96,16 +96,18 @@ class Bd {
             criando_tr.appendChild(criando_td_descricao)
             criando_tr.appendChild(criando_td_valor)
             document.getElementById("tabela").appendChild(criando_tr)
+            console.log(id)
             id = id + 1
         }
     }
     filtro(array_despesas) {
+         document.getElementById("tabela").remove()
         let tipo = document.getElementById("tipo_consulta").value
         let filtro = array_despesas.filter(
             (f)=>f.tipo==tipo
         )
         console.log(filtro)
-        bd.adicionandoRegistros(filtro)
+
     }
 }
 
@@ -131,7 +133,6 @@ function cadastrandoUsuario () {
     } else {
         alert("Dados inválidos tente novamente")
     }
-
 }
 
 function consultando_dados() {
