@@ -3,7 +3,6 @@ body {
 
 }
 
-
 .titulo {
     font-size: 50px;
     color: blue;
@@ -12,6 +11,8 @@ body {
     font-style: italic;
     -webkit-text-stroke-width: 2px; /* largura da borda */
     -webkit-text-stroke-color: #000; /* cor da borda */
+
+
 }
 
 #tabela th {
@@ -46,6 +47,21 @@ body {
 #tabela tr:hover {
     background: orange;
     border: 1px solid white;
+}
+
+#mensagem {
+    text-align: center;
+    margin: 20px;
+}
+
+#sucesso {
+    border: 1px solid black;
+    border-radius: 20px;
+}
+
+#erro {
+    border: 1px solid black;
+    border-radius: 20px;
 }
 
 

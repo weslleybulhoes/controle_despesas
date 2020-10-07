@@ -117,6 +117,18 @@ class Bd {
         )
         console.log(filtro)
     }
+    mensagem(mensagem, cor, id) {
+        let criando_h1 = document.createElement("h3")
+        criando_h1.innerHTML = mensagem
+        criando_h1.style.background = cor
+        criando_h1.id = id
+        document.getElementById("mensagem").appendChild(criando_h1)
+        setTimeout(function () {
+            criando_h1.remove()
+            }, 3000
+        )
+
+    }
 }
 
 let bd = new Bd()
@@ -128,7 +140,6 @@ function cadastrandoUsuario () {
     let tipo = document.getElementById("tipo").value
     let descricao = document.getElementById("descricao").value
     let valor = document.getElementById("valor").value
-
     let despesa = new Despesa(ano, mes, dia, tipo, descricao, valor)
 
 
@@ -137,11 +148,12 @@ function cadastrandoUsuario () {
         document.getElementById("dia").value = ""
         document.getElementById("descricao").value = ""
         document.getElementById("valor").value = ""
-        alert("Dados Inseridos com sucesso!")
+        bd.mensagem("Dados Inseridos com sucesso!", "green", "sucesso")
     } else {
-        alert("Dados inválidos tente novamente")
+        bd.mensagem("Dados inválidos tente novamente", "red", "erro")
     }
 }
+
 
 function consultando_dados() {
     let array_despesas = bd.recuperarRegistros()
@@ -152,9 +164,6 @@ function filtrando_dados() {
     let array_despesas = bd.recuperarRegistros()
     bd.filtro(array_despesas)
 }
-
-
-
 
 
 

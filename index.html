@@ -16,15 +16,12 @@
 
       <!-- Javascript -->
       <script src="javascript.js"> </script>
-      
+
       <link rel="stylesheet" type="text/css" href="front.css">
-
-
 
 	</head>
 
   <body>
-
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-5">
       <div class="container">
@@ -52,7 +49,7 @@
     <div class="container">
       <div class="row">
         <div class="col mb-5">
-          <h1 class="display-4">Registro de nova despesa</h1>
+          <h1 class="display-4; titulo">Registro de nova despesa</h1>
         </div>
       </div>
 
@@ -104,15 +101,19 @@
         </div>
 
         <div class="col-md-2">
-          <input type="text" class="form-control" placeholder="Valor em R$" id="valor" />
+          <input type="number" class="form-control" placeholder="Valor em R$" id="valor" />
         </div>
 
         <div class="col-md-2 d-flex justify-content-end">
           <button type="button" class="btn btn-primary" onclick="cadastrandoUsuario()">
-            <i class="fas fa-plus"></i>
+            <i class="fas fa-plus"></i> Adicionar Despesa
           </button>
         </div>
       </div>
+    </div>
+    <div id="mensagem">
+      <br><br>
+
     </div>
   </body>	
 
