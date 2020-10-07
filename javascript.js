@@ -59,7 +59,7 @@ class Bd {
 
     adicionandoRegistros(array_despesas) {
         let id = 0
-        console.log(array_despesas.length)
+        let somando_despesas = 0
         while (id < array_despesas.length) {
             let criando_tr = document.createElement("tr")
             let criando_td_data = document.createElement("td")
@@ -95,19 +95,27 @@ class Bd {
             criando_tr.appendChild(criando_td_tipo)
             criando_tr.appendChild(criando_td_descricao)
             criando_tr.appendChild(criando_td_valor)
+            if (id%2==0) {
+                criando_tr.className = "tr_par"
+            }
+            else {
+                criando_tr.className = "tr_inpar"
+            }
             document.getElementById("tabela").appendChild(criando_tr)
-            console.log(id)
-            id = id + 1
+            somando_despesas += parseFloat(array_despesas[id]["valor"])
+            id += 1
         }
+        let total = document.createElement("th")
+        total.colSpan = "4"
+        total.innerHTML = "Total de despesas: R$ "+ somando_despesas
+        document.getElementById("tabela").appendChild(total)
     }
     filtro(array_despesas) {
-         document.getElementById("tabela").remove()
         let tipo = document.getElementById("tipo_consulta").value
         let filtro = array_despesas.filter(
             (f)=>f.tipo==tipo
         )
         console.log(filtro)
-
     }
 }
 
