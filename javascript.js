@@ -164,22 +164,17 @@ let bd = new Bd()
 
 function cadastrandoUsuario () {
     let data = document.getElementById("data").value
-    console.log(data.slice(5,7))
-    let ano = document.getElementById("ano").value
-    let mes = document.getElementById("mes").value
-    let dia = document.getElementById("dia").value
+    let ano = data.slice(0,4)
+    let mes = data.slice(5,7)
+    let dia = data.slice(8)
     let tipo = document.getElementById("tipo").value
     let descricao = document.getElementById("descricao").value
     let valor = document.getElementById("valor").value
 
-    document.getElementById("ano").value = data.slice(0,4)
     let despesa = new Despesa(ano, mes, dia, tipo, descricao, valor)
 
     if (despesa.validarDados()) {
         bd.gravar(despesa)
-        document.getElementById("dia").value = "ok"
-        document.getElementById("mes").value = ""
-        document.getElementById("ano").value = ""
         bd.mensagem("Dados Inseridos com sucesso!", "green", "sucesso")
     } else {
         bd.mensagem("Dados inválidos tente novamente", "red", "erro")
