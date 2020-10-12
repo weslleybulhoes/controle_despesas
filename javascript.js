@@ -50,21 +50,22 @@ class Bd {
             if (despesa === null) {
                 continue
             }
+            despesa.id = i
             array_despesas.push(despesa)
-
         }
         return array_despesas
     }
 
     adicionandoRegistros(array_despesas) {
-        let id = 0
+        var id = 0
         let somando_despesas = 0
         while (id < array_despesas.length) {
-            let criando_tr = document.createElement("tr")
+            var criando_tr = document.createElement("tr")
             let criando_td_data = document.createElement("td")
             let criando_td_tipo = document.createElement("td")
             let criando_td_descricao = document.createElement("td")
             let criando_td_valor = document.createElement("td")
+            let btn = document.createElement("button")
 
             switch (parseInt(array_despesas[id]["tipo"])) {
                 case 1:
@@ -100,12 +101,23 @@ class Bd {
             else {
                 criando_tr.className = "tr_inpar"
             }
+            btn.className = 'btn btn-danger'
+            btn.innerHTML = '<i class="fas fa-times"></i>'
+            btn.style.margin = "8"
+            btn.style.marginLeft = "40%"
+            criando_tr.appendChild(btn)
             document.getElementById("tabela").appendChild(criando_tr)
             somando_despesas += parseFloat(array_despesas[id]["valor"])
+            btn.id = "ident"+array_despesas[id].id
+            btn.onclick = function () {
+                let id = this.id.replace('ident','')
+                localStorage.removeItem(id)
+                window.location.reload()
+            }
             id += 1
         }
         let total = document.createElement("th")
-        total.colSpan = "4"
+        total.colSpan = "5"
         total.innerHTML = "Total de despesas: R$ "+ somando_despesas
         document.getElementById("tabela").appendChild(total)
     }
@@ -128,17 +140,11 @@ class Bd {
                 (f) => f[filtro] == despesa_filtrada[filtro]
             )
         }
-
-        console.log(filtrando_array[contador])
-
+        document.getElementById("tabela").innerHTML = ""
 
         bd.adicionandoRegistros(filtrando_array[contador])
 
     }
-
-
-
-
 
     mensagem(mensagem, cor, id) {
         let criando_h1 = document.createElement("h3")
@@ -157,19 +163,23 @@ class Bd {
 let bd = new Bd()
 
 function cadastrandoUsuario () {
+    let data = document.getElementById("data").value
+    console.log(data.slice(5,7))
     let ano = document.getElementById("ano").value
     let mes = document.getElementById("mes").value
     let dia = document.getElementById("dia").value
     let tipo = document.getElementById("tipo").value
     let descricao = document.getElementById("descricao").value
     let valor = document.getElementById("valor").value
+
+    document.getElementById("ano").value = data.slice(0,4)
     let despesa = new Despesa(ano, mes, dia, tipo, descricao, valor)
 
     if (despesa.validarDados()) {
         bd.gravar(despesa)
-        document.getElementById("dia").value = ""
-        document.getElementById("descricao").value = ""
-        document.getElementById("valor").value = ""
+        document.getElementById("dia").value = "ok"
+        document.getElementById("mes").value = ""
+        document.getElementById("ano").value = ""
         bd.mensagem("Dados Inseridos com sucesso!", "green", "sucesso")
     } else {
         bd.mensagem("Dados inválidos tente novamente", "red", "erro")
