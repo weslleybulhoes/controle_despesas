@@ -111,25 +111,29 @@ class Bd {
     }
     filtro(despesa_filtrada, despesa_todas) {
         var filtrando_array = Array()
-        console.log(despesa_filtrada.ano)
 
-        if (despesa_filtrada.ano != '') {
-            filtrando_array = despesa_todas.filter(
-                (d) => d.ano == despesa_filtrada.ano)
+        for (var invalido in despesa_filtrada) {
+            if (despesa_filtrada[invalido] =='') {
+                delete despesa_filtrada[invalido]
+            }
         }
-
-        if (despesa_filtrada.mes !="") {
-            filtrando_array = despesa_todas.filter(
-                (f) => f.mes == despesa_filtrada.mes
+        var contador = 1
+        for (var filtro in despesa_filtrada) {
+            if (contador==1) {
+                filtrando_array[contador] = despesa_todas.filter(
+                    (f) => f[filtro] == despesa_filtrada[filtro])
+            }
+            contador++
+            filtrando_array[contador] = filtrando_array[contador-1].filter(
+                (f) => f[filtro] == despesa_filtrada[filtro]
             )
         }
-        if (despesa_filtrada.dia !="") {
-            filtrando_array = despesa_todas.filter(
-                (f) => f.dia == despesa_filtrada.dia
-            )
-        }
 
-        console.log(filtrando_array)
+        console.log(filtrando_array[contador])
+
+
+        bd.adicionandoRegistros(filtrando_array[contador])
+
     }
 
 
