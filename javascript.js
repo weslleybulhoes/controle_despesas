@@ -38,7 +38,6 @@ class Bd {
         despesa_json = JSON.stringify(despesa_json)
         localStorage.setItem(id, despesa_json)
         localStorage.setItem("id", id)
-        console.log(localStorage.getItem(id))
     }
 
     recuperarRegistros() {
@@ -110,13 +109,33 @@ class Bd {
         total.innerHTML = "Total de despesas: R$ "+ somando_despesas
         document.getElementById("tabela").appendChild(total)
     }
-    filtro(array_despesas) {
-        let tipo = document.getElementById("tipo_consulta").value
-        let filtro = array_despesas.filter(
-            (f)=>f.tipo==tipo
-        )
-        console.log(filtro)
+    filtro(despesa_filtrada, despesa_todas) {
+        var filtrando_array = Array()
+        console.log(despesa_filtrada.ano)
+
+        if (despesa_filtrada.ano != '') {
+            filtrando_array = despesa_todas.filter(
+                (d) => d.ano == despesa_filtrada.ano)
+        }
+
+        if (despesa_filtrada.mes !="") {
+            filtrando_array = despesa_todas.filter(
+                (f) => f.mes == despesa_filtrada.mes
+            )
+        }
+        if (despesa_filtrada.dia !="") {
+            filtrando_array = despesa_todas.filter(
+                (f) => f.dia == despesa_filtrada.dia
+            )
+        }
+
+        console.log(filtrando_array)
     }
+
+
+
+
+
     mensagem(mensagem, cor, id) {
         let criando_h1 = document.createElement("h3")
         criando_h1.innerHTML = mensagem
@@ -142,8 +161,7 @@ function cadastrandoUsuario () {
     let valor = document.getElementById("valor").value
     let despesa = new Despesa(ano, mes, dia, tipo, descricao, valor)
 
-
-    if (despesa.validarDados()==true) {
+    if (despesa.validarDados()) {
         bd.gravar(despesa)
         document.getElementById("dia").value = ""
         document.getElementById("descricao").value = ""
@@ -161,8 +179,15 @@ function consultando_dados() {
 }
 
 function filtrando_dados() {
-    let array_despesas = bd.recuperarRegistros()
-    bd.filtro(array_despesas)
+    let ano = document.getElementById("ano").value
+    let dia = document.getElementById("dia").value
+    let mes = document.getElementById("mes").value
+    let descricao = document.getElementById("descricao").value
+    let valor = document.getElementById("valor").value
+    let tipo = document.getElementById("tipo_consulta").value
+    let despesa = new Despesa(ano, mes, dia, tipo, descricao, valor)
+    let despesa_todas = bd.recuperarRegistros()
+    bd.filtro(despesa, despesa_todas)
 }
 
 
