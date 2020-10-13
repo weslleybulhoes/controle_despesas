@@ -69,3 +69,15 @@ input.submit {
 	color: black;
 	border: 2px solid black;
 }
+
+#download {
+	margin-left: 92%;
+	margin-bottom: 4px;
+	background: red;
+	color: aliceblue;
+	border: 2px solid black;
+}
+#download:hover {
+	background: aliceblue;
+	color: red;
+}
