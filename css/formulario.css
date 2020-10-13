@@ -1,6 +1,6 @@
 body{
 	font-family: "Trebuchet MS", Helvetica, sans-serif;
-	background: #643d87 url(../imagem/fundo.jpg) no-repeat top center;
+	background: #643d87 url(../imagem/fundo.jpg) repeat top center;
 }
 
 #container {
@@ -35,14 +35,17 @@ input, select {
 }
 
 #data {
-	background-image: url(../imagem/icone-usuario.png);
+	background-image: url(../imagem/icone_data.jpg);
 }
 
 #valor {
-	background-image: url(../imagem/icone-cadeado.png);
+	background-image: url(../imagem/icone_dinheiro.png);
 }
 #tipo {
-
+	background-image: url(../imagem/icone_tipo.jpg);
+}
+#descricao {
+	background-image: url(../imagem/icone_descricao.png);
 }
 
 
@@ -59,4 +62,10 @@ input.submit {
 	background: -o-linear-gradient(to bottom, #faa600, #f68a00);
 	background: linear-gradient(to bottom, #faa600, #f68a00);
 
+}
+
+#bt:hover {
+	background: blueviolet;
+	color: black;
+	border: 2px solid black;
 }

@@ -47,14 +47,14 @@
     </nav>
 
     <div id="container">
-      <img src="imagem/perfil.png">
+      <img src="imagem/controle.png" style="width: 125px; height: 125px">
       <form>
         <div>
           <input type="date" id="data" max="2030-01-01" min="1920-01-01" required>
         </div>
         <div>
           <select id="tipo" required>
-            <option value="">Tipo de despesa</option>
+            <option value="" disabled selected>Tipo de despesa</option>
             <option value="1">Alimentação</option>
             <option value="2">Educação</option>
             <option value="3">Lazer</option>
@@ -64,25 +64,21 @@
         </div>
 
         <div>
-          <input type="number" step="any" placeholder="Valor da despesa em R$" id="valor" required>
+          <input type="number" step="any" placeholder="Valor da despesa" id="valor" required>
         </div>
         <div>
-          <input type="text" placeholder="Descreva a despesa"
+          <input type="text" placeholder="Descreva sua despesa"
                  id="descricao" maxlength="100" required>
         </div>
 
         <div>
           <input class="submit" type="submit"
-                 value="Registrar Despesa"
+                 value="Registrar Despesa" id="bt"
                  required onclick="cadastrandoUsuario ()">
         </div>
       </form>
-
 	</div>
 
-    <div id="mensagem">
-      <br><br>
-    </div>
   </body>	
 
 </html>

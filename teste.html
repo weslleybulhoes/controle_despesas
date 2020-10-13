@@ -1,0 +1,34 @@
+
+<input type="button" id="btnExport"
+       value=" Export Table data into Excel "
+       onclick="ExportToExcel()" />
+    <br/>
+    <br/>
+    <div id="dvData">
+        <table id="tabela3">
+            <tr>
+                <th>Column One</th>
+                <th>Column Two</th>
+                <th>Column Three</th>
+            </tr>
+            <tr>
+                <td>row1 Col1</td>
+                <td>row1 Col2</td>
+                <td>row1 Col3</td>
+            </tr>
+            <tr>
+                <td>row2 Col1</td>
+                <td>row2 Col2</td>
+                <td>row2 Col3</td>
+            </tr>
+
+        </table>
+    </div>
+
+<script type="text/javascript">
+    function ExportToExcel(){
+       var htmltable= document.getElementById('tabela3');
+       var html = htmltable.outerHTML;
+       window.open('data:application/vnd.ms-excel,' + encodeURIComponent(html));
+    }
+</script>

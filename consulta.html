@@ -97,11 +97,13 @@
 
       <div class="row  mb-5">
         <div class="col-md-8">
-          <input type="text" class="form-control" placeholder="Descrição" id="descricao" />
+          <input type="text" class="form-control" placeholder="Descrição"
+                 id="descricao"style="padding-left: 40px"/>
         </div>
 
         <div class="col-md-2">
-          <input type="text" class="form-control" placeholder="Valor" id="valor" />
+          <input type="text" class="form-control"
+                 placeholder="Valor" id="valor" style="padding-left: 40px"/>
         </div>
 
         <div class="col-md-2 d-flex justify-content-end">
@@ -110,6 +112,9 @@
           </button>
         </div>
       </div>
+      <button type="button" id="download" onclick="ExportToExcel()">
+        Fazer download
+      </button>
 
       <div class="row">
         <div class="col">

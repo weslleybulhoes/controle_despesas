@@ -119,6 +119,7 @@ class Bd {
         let total = document.createElement("th")
         total.colSpan = "5"
         total.innerHTML = "Total de despesas: R$ "+ somando_despesas
+
         document.getElementById("tabela").appendChild(total)
     }
     filtro(despesa_filtrada, despesa_todas) {
@@ -146,17 +147,8 @@ class Bd {
 
     }
 
-    mensagem(mensagem, cor, id) {
-        let criando_h1 = document.createElement("h3")
-        criando_h1.innerHTML = mensagem
-        criando_h1.style.background = cor
-        criando_h1.id = id
-        document.getElementById("mensagem").appendChild(criando_h1)
-        setTimeout(function () {
-            criando_h1.remove()
-            }, 3000
-        )
-
+    mensagem(mensagem) {
+        alert(mensagem)
     }
 }
 
@@ -175,9 +167,9 @@ function cadastrandoUsuario () {
 
     if (despesa.validarDados()) {
         bd.gravar(despesa)
-        bd.mensagem("Dados Inseridos com sucesso!", "green", "sucesso")
+        bd.mensagem("Dados Inseridos com sucesso!")
     } else {
-        bd.mensagem("Dados inválidos tente novamente", "red", "erro")
+        bd.mensagem("Dados inválidos tente novamente")
     }
 }
 
@@ -201,5 +193,9 @@ function filtrando_dados() {
 
 
 
-
+function ExportToExcel() {
+       var htmltable= document.getElementById('tabela1');
+       var html = htmltable.outerHTML;
+       window.open('data:application/vnd.ms-excel,' + encodeURIComponent(html));
+}
 
