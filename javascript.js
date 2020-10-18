@@ -123,6 +123,7 @@ class Bd {
         document.getElementById("tabela").appendChild(total)
     }
     filtro(despesa_filtrada, despesa_todas) {
+
         var filtrando_array = Array()
 
         for (var invalido in despesa_filtrada) {
@@ -130,6 +131,7 @@ class Bd {
                 delete despesa_filtrada[invalido]
             }
         }
+
         var contador = 1
         for (var filtro in despesa_filtrada) {
             if (contador==1) {
@@ -141,10 +143,34 @@ class Bd {
                 (f) => f[filtro] == despesa_filtrada[filtro]
             )
         }
+        bd.sairdofiltro()
         document.getElementById("tabela").innerHTML = ""
+        if (filtrando_array[contador]===undefined || filtrando_array[contador].length==0) {
+            let erro = document.createElement("th")
+            erro.colSpan = "5"
+            erro.innerHTML = "Não existem dados para o filtro informado."
+            erro.style.background = "#ff4040"
+            document.getElementById("tabela").appendChild(erro)
+            return
+        }
 
         bd.adicionandoRegistros(filtrando_array[contador])
 
+    }
+
+    sairdofiltro () {
+        if (gambiarra===false) {
+            document.getElementById("atualizar").remove()
+        }
+        let botao_sair = document.createElement("button")
+        botao_sair.innerHTML = "Sair do Filtro"
+        botao_sair.id = "atualizar"
+        botao_sair.className = "download"
+        gambiarra = false
+        document.getElementById("add_filtro").appendChild(botao_sair)
+        botao_sair.onclick = function () {
+            window.location.reload()
+        }
     }
 
     mensagem(mensagem) {
@@ -153,6 +179,7 @@ class Bd {
 }
 
 let bd = new Bd()
+var gambiarra = true
 
 function cadastrandoUsuario () {
     let data = document.getElementById("data").value
@@ -198,4 +225,5 @@ function ExportToExcel() {
        var html = htmltable.outerHTML;
        window.open('data:application/vnd.ms-excel,' + encodeURIComponent(html));
 }
+
 

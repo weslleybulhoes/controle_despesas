@@ -35,6 +35,7 @@ input, select {
 }
 
 #data {
+	width: 360px;
 	background-image: url(../imagem/icone_data.jpg);
 }
 
@@ -42,10 +43,14 @@ input, select {
 	background-image: url(../imagem/icone_dinheiro.png);
 }
 #tipo {
+	width: 360px;
 	background-image: url(../imagem/icone_tipo.jpg);
 }
 #descricao {
 	background-image: url(../imagem/icone_descricao.png);
+}
+.valores input {
+	width: 360px;
 }
 
 
@@ -70,14 +75,21 @@ input.submit {
 	border: 2px solid black;
 }
 
-#download {
+.download {
 	margin-left: 92%;
 	margin-bottom: 4px;
 	background: red;
 	color: aliceblue;
 	border: 2px solid black;
 }
-#download:hover {
+.download:hover {
 	background: aliceblue;
 	color: red;
+}
+
+#atualizar {
+	position: relative;
+	bottom: 11px;
+	margin-left: 83%;
+	right: 5px;
 }
