@@ -131,12 +131,6 @@ class Bd {
                 delete despesa_filtrada[invalido]
             }
         }
-        /*
-        for (var filtro in despesa_filtrada) {
-            filtrando_array= despesa_filtrada.filter((f) =>
-                f[filtro]==despesa_filtrada[filtro])
-        }
-         */
 
         var contador = 1
         for (var filtro in despesa_filtrada) {
@@ -149,7 +143,6 @@ class Bd {
                 (f) => f[filtro] == despesa_filtrada[filtro]
             )
         }
-
         bd.sairdofiltro()
         document.getElementById("tabela").innerHTML = ""
         if (filtrando_array[contador]===undefined || filtrando_array[contador].length==0) {
